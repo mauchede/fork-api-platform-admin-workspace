@@ -1,26 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import {HydraAdmin, ListGuesser, ResourceGuesser} from '@api-platform/admin';
+import {TextField} from 'react-admin';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const BookListGuesser = props => {
+    return (
+        <ListGuesser {...props}>
+            <TextField source={'description'} label={'description'} />
+        </ListGuesser>
+    );
+};
+
+const BookResourceGuesser = props => (
+    <ResourceGuesser list={BookListGuesser} {...props} />
+);
+
+class App extends Component {
+    render() {
+        return (
+            <HydraAdmin entrypoint="https://demo.api-platform.com">
+                <BookResourceGuesser name={'books'} />
+            </HydraAdmin>
+        );
+    }
 }
 
 export default App;

@@ -1,0 +1,14 @@
+#!/bin/bash
+set -e -u -x
+
+cd /srv/fork
+yarn link
+
+cd /srv/workspace
+yarn link "@api-platform/admin"
+
+cd /srv/workspace/node_modules/react
+yarn link
+
+cd /srv/fork
+yarn link "react"

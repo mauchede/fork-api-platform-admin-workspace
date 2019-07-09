@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+
+    app:
+        build:
+            context: '.'
+            dockerfile: '.docker/app/Dockerfile'
+        volumes:
+            - 'cache:/usr/local/share/.cache'
+            - 'config:/usr/local/share/.config'
+            - '${PWD}/../fork-api-platform-admin:/srv/fork'
+            - '${PWD}:/srv/workspace'
+
+volumes:
+
+    cache: ~
+
+    config: ~
